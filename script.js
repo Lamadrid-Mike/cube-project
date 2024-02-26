@@ -32,7 +32,13 @@ const timeoutEffect = (seconds) => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  timeoutEffect(3)
+  let allImagesSource = Array.from(document.querySelectorAll("body img"));
+
+  allImagesSource.forEach((image) => {
+    console.log(image.src);
+  });
+
+  timeoutEffect(2)
     .then(() => {
       yAngle += 90;
       cubeRotation(xAngle, yAngle);
@@ -40,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(() => {
       leftSideCube.style.opacity = 1;
       leftSideCube.classList.add("left-effect");
-      return timeoutEffect(3);
+      return timeoutEffect(2);
     })
     .then(() => {
       yAngle += 90;
@@ -49,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(() => {
       backSideCube.style.opacity = 1;
       backSideCube.classList.add("back-effect");
-      return timeoutEffect(3);
+      return timeoutEffect(2);
     })
     .then(() => {
       yAngle += 90;
@@ -58,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(() => {
       rightSideCube.style.opacity = 1;
       rightSideCube.classList.add("right-effect");
-      return timeoutEffect(3);
+      return timeoutEffect(2);
     })
     .then(() => {
       xAngle -= 90;
@@ -68,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(() => {
       topSideCube.style.opacity = 1;
       topSideCube.classList.add("top-effect");
-      return timeoutEffect(3);
+      return timeoutEffect(2);
     })
     .then(() => {
       xAngle += 180;
@@ -77,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(() => {
       bottomSideCube.style.opacity = 1;
       bottomSideCube.classList.add("bottom-effect");
-      return timeoutEffect(3);
+      return timeoutEffect(2);
     })
     .then(() => {
       xAngle += -70;
