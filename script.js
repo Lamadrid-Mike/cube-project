@@ -17,7 +17,7 @@ const cubeRotation = function (xAngle, yAngle) {
 };
 
 //change background function!
-const imageChanger = () => {
+const earthBackground = () => {
   earth.style.background
     ? (earth.style.background = "")
     : (earth.style.background = `url("/images/good-earth.jpg")`);
@@ -32,12 +32,6 @@ const timeoutEffect = (seconds) => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  let allImagesSource = Array.from(document.querySelectorAll("body img"));
-
-  allImagesSource.forEach((image) => {
-    console.log(image.src);
-  });
-
   timeoutEffect(2)
     .then(() => {
       yAngle += 90;
@@ -86,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return timeoutEffect(2);
     })
     .then(() => {
-      xAngle += -70;
+      xAngle += -60;
       yAngle += 0;
       cubeRotation(xAngle, yAngle);
       topImageFront.style.transform = "rotate(180deg)";
@@ -96,6 +90,30 @@ document.addEventListener("DOMContentLoaded", function () {
       outerLayerCube.classList.add("cube-rotation");
       earth.style.animation =
         "earth-rotate 5s linear infinite, background-spin 15s infinite";
-      return timeoutEffect(5);
+      return timeoutEffect(3);
+    })
+    .then(() => {
+      yAngle += 360;
+      cubeRotation(xAngle, yAngle);
+      cube.classList.add("active-hover");
+      changeCubeImages();
+      return timeoutEffect(6);
+    })
+    .then(() => {
+      yAngle += 360;
+      cubeRotation(xAngle, yAngle);
+      earthBackground();
+      return timeoutEffect(6);
+    })
+    .then(() => {
+      cube.classList.remove("active-hover");
     });
 });
+
+const changeCubeImages = function () {
+  let allImagesSource = Array.from(document.querySelectorAll("body img"));
+
+  allImagesSource.forEach((image) => {
+    image.src = image.src.replace(/bad/g, "good");
+  });
+};
