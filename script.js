@@ -4,13 +4,13 @@ let yAngle = 0;
 let cube = document.getElementById("cube");
 let outerLayerCube = document.getElementById("outer__layer-cube");
 let earth = document.getElementById("earth");
-let frontSideCube = document.getElementById("front");
 let leftSideCube = document.getElementById("left");
 let backSideCube = document.getElementById("back");
 let rightSideCube = document.getElementById("right");
 let topSideCube = document.getElementById("top");
 let bottomSideCube = document.getElementById("bottom");
 let topImageFront = document.getElementById("top__front-image");
+let frontSideCube = document.getElementById("front");
 
 const cubeRotation = function (xAngle, yAngle) {
   cube.style.transform = `rotateX(${xAngle}deg) rotateY(${yAngle}deg)`;
@@ -23,7 +23,6 @@ const earthBackground = () => {
     : (earth.style.background = `url("/images/good-earth.jpg")`);
 };
 
-//cube effect will be here!
 const timeoutEffect = (seconds) => {
   seconds = seconds * 1000;
   return new Promise((resolve) => {
@@ -32,8 +31,32 @@ const timeoutEffect = (seconds) => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+  playCube();
+});
+
+const changeCubeImages = function () {
+  let allImagesSource = Array.from(document.querySelectorAll("body img"));
+
+  allImagesSource.forEach((image) => {
+    image.src = image.src.replace(/bad/g, "good");
+  });
+};
+
+const hideSidesCube = function () {
+  let allCubeSides = Array.from(document.getElementsByClassName("face"));
+
+  earth.style.animation = "";
+
+  allCubeSides.forEach((sides) => {
+    sides.classList.remove(`${sides.id}-effect`);
+    sides.style.opacity = 0;
+  });
+};
+
+const playCube = function () {
   timeoutEffect(2)
     .then(() => {
+      frontSideCube.style.opacity = 1;
       yAngle += 90;
       cubeRotation(xAngle, yAngle);
     })
@@ -90,30 +113,26 @@ document.addEventListener("DOMContentLoaded", function () {
       outerLayerCube.classList.add("cube-rotation");
       earth.style.animation =
         "earth-rotate 5s linear infinite, background-spin 15s infinite";
-      return timeoutEffect(3);
+      return timeoutEffect(4);
     })
     .then(() => {
-      yAngle += 360;
-      cubeRotation(xAngle, yAngle);
       cube.classList.add("active-hover");
-      changeCubeImages();
-      return timeoutEffect(6);
+      return timeoutEffect(5);
     })
     .then(() => {
-      yAngle += 360;
+      xAngle = 0;
+      yAngle = 0;
       cubeRotation(xAngle, yAngle);
-      earthBackground();
-      return timeoutEffect(6);
+      cube.classList.remove("active-hover");
+      outerLayerCube.classList.remove("cube-rotation");
+      hideSidesCube();
+      return timeoutEffect(1);
     })
     .then(() => {
-      cube.classList.remove("active-hover");
+      changeCubeImages();
+      return timeoutEffect(2);
+    })
+    .then(() => {
+      playCube();
     });
-});
-
-const changeCubeImages = function () {
-  let allImagesSource = Array.from(document.querySelectorAll("body img"));
-
-  allImagesSource.forEach((image) => {
-    image.src = image.src.replace(/bad/g, "good");
-  });
 };
