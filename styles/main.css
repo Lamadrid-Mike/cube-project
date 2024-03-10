@@ -238,7 +238,6 @@ body {
 
 .bottom {
   opacity: 0;
-
   transform: translateY(100px) rotateX(-90deg);
   transition: transform 0.4s;
 }
@@ -293,4 +292,13 @@ body {
 
 .cube-rotation {
   animation: cube-rotation 5s linear infinite;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

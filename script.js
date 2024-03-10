@@ -1,5 +1,6 @@
 let xAngle = 0;
 let yAngle = 0;
+let cubeCycle = false;
 
 let cube = document.getElementById("cube");
 let outerLayerCube = document.getElementById("outer__layer-cube");
@@ -17,11 +18,11 @@ const cubeRotation = function (xAngle, yAngle) {
 };
 
 //change background function!
-const earthBackground = () => {
-  earth.style.background
-    ? (earth.style.background = "")
-    : (earth.style.background = `url("/images/good-earth.jpg")`);
-};
+// const earthBackground = () => {
+//   earth.style.background
+//     ? (earth.style.background = "")
+//     : (earth.style.background = `url("/images/good-earth.jpg")`);
+// };
 
 const timeoutEffect = (seconds) => {
   seconds = seconds * 1000;
@@ -38,7 +39,14 @@ const changeCubeImages = function () {
   let allImagesSource = Array.from(document.querySelectorAll("body img"));
 
   allImagesSource.forEach((image) => {
-    image.src = image.src.replace(/bad/g, "good");
+    const pattern = /bad/g;
+    const imageSource = image.src;
+
+    if (pattern.test(imageSource)) {
+      image.src = image.src.replace(pattern, "good");
+    } else {
+      image.src = image.src.replace(/good/g, "bad");
+    }
   });
 };
 
@@ -52,6 +60,9 @@ const hideSidesCube = function () {
     sides.style.opacity = 0;
   });
 };
+
+//false will be bad to good gif, and bad image background
+//true will be good to bad gif, and good image background
 
 const playCube = function () {
   timeoutEffect(2)
@@ -110,14 +121,21 @@ const playCube = function () {
       return timeoutEffect(1);
     })
     .then(() => {
+      cubeCycle
+        ? (earth.style.background = `url("/images/good-earth.jpg")`)
+        : (earth.style.background = `url("/images/bad-earth.jpg")`);
+
       outerLayerCube.classList.add("cube-rotation");
       earth.style.animation =
         "earth-rotate 5s linear infinite, background-spin 15s infinite";
-      return timeoutEffect(4);
+      return timeoutEffect(5);
     })
     .then(() => {
       cube.classList.add("active-hover");
-      return timeoutEffect(5);
+      return timeoutEffect(10);
+    })
+    .then(() => {
+      hideSidesCube();
     })
     .then(() => {
       xAngle = 0;
@@ -125,12 +143,12 @@ const playCube = function () {
       cubeRotation(xAngle, yAngle);
       cube.classList.remove("active-hover");
       outerLayerCube.classList.remove("cube-rotation");
-      hideSidesCube();
       return timeoutEffect(1);
     })
     .then(() => {
       changeCubeImages();
-      return timeoutEffect(2);
+      cubeCycle = !cubeCycle;
+      return timeoutEffect(1);
     })
     .then(() => {
       playCube();
