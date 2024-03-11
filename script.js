@@ -61,10 +61,14 @@ const hideSidesCube = function () {
   });
 };
 
-//false will be bad to good gif, and bad image background
 //true will be good to bad gif, and good image background
+//false will be bad to good gif, and bad image background
 
 const playCube = function () {
+  earth.style.opacity = 1;
+  cubeCycle
+    ? (earth.style.background = `url("/images/bad-to-good-earth.gif")`)
+    : (earth.style.background = `url("/images/good-to-bad-earth.gif")`);
   timeoutEffect(2)
     .then(() => {
       frontSideCube.style.opacity = 1;
@@ -143,12 +147,13 @@ const playCube = function () {
       cubeRotation(xAngle, yAngle);
       cube.classList.remove("active-hover");
       outerLayerCube.classList.remove("cube-rotation");
+      earth.style.opacity = 0;
       return timeoutEffect(1);
     })
     .then(() => {
       changeCubeImages();
       cubeCycle = !cubeCycle;
-      return timeoutEffect(1);
+      return timeoutEffect(3);
     })
     .then(() => {
       playCube();
