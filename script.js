@@ -17,13 +17,6 @@ const cubeRotation = function (xAngle, yAngle) {
   cube.style.transform = `rotateX(${xAngle}deg) rotateY(${yAngle}deg)`;
 };
 
-//change background function!
-// const earthBackground = () => {
-//   earth.style.background
-//     ? (earth.style.background = "")
-//     : (earth.style.background = `url("/images/good-earth.jpg")`);
-// };
-
 const timeoutEffect = (seconds) => {
   seconds = seconds * 1000;
   return new Promise((resolve) => {
@@ -72,6 +65,10 @@ const playCube = function () {
   timeoutEffect(2)
     .then(() => {
       frontSideCube.style.opacity = 1;
+      frontSideCube.classList.add("front-effect");
+      return timeoutEffect(2);
+    })
+    .then(() => {
       yAngle += 90;
       cubeRotation(xAngle, yAngle);
     })
@@ -128,7 +125,6 @@ const playCube = function () {
       cubeCycle
         ? (earth.style.background = `url("/images/good-earth.jpg")`)
         : (earth.style.background = `url("/images/bad-earth.jpg")`);
-
       outerLayerCube.classList.add("cube-rotation");
       earth.style.animation =
         "earth-rotate 5s linear infinite, background-spin 15s infinite";
