@@ -132,7 +132,7 @@ const playCube = function () {
     })
     .then(() => {
       cube.classList.add("active-hover");
-      return timeoutEffect(10);
+      return timeoutEffect(9);
     })
     .then(() => {
       hideSidesCube();
@@ -149,6 +149,7 @@ const playCube = function () {
     .then(() => {
       changeCubeImages();
       cubeCycle = !cubeCycle;
+      topImageFront.style.transform = "";
       return timeoutEffect(3);
     })
     .then(() => {

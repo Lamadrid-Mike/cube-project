@@ -61,23 +61,22 @@ body {
 /* this selects all the sides of the cube */
 .face {
   border: 1px solid black;
-  opacity: 0.9;
   position: absolute;
   width: 200px;
   height: 200px;
   background-size: cover;
   transform-style: preserve-3d;
+  transition: all 2s;
 }
 
 /* front keyframe --------------------------*/
 @keyframes front-effect {
   0% {
     transform: translateZ(100px) translateY(300px) translateX(300px);
-
-    opacity: 1;
+    opacity: 0;
   }
   75% {
-    opacity: 1;
+    opacity: 0.8;
   }
   100% {
     transform: translateZ(100px);
@@ -132,7 +131,7 @@ body {
     opacity: 0;
   }
   75% {
-    opacity: 1;
+    opacity: 0.8;
   }
   100% {
     transform: translateY(0px) rotateY(90deg) translateZ(100px);
