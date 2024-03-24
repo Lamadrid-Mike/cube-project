@@ -269,7 +269,7 @@ body {
   border-radius: 50%;
   box-shadow: rgb(0, 0, 0) 16px 0px 50px 6px inset,
     rgba(255, 255, 255, 0.2) -3px 0px 10px 2px inset;
-  animation: background-spin 18s infinite;
+  animation: background-spin 8s infinite;
   transition: opacity 1.5s;
   position: absolute;
   left: 0;
