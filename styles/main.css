@@ -3,6 +3,7 @@ body {
   font-size: 30px;
   perspective: 1000px;
   overflow: hidden;
+  position: relative;
 }
 
 .outer__layer-cube {
@@ -299,4 +300,16 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+/* This will be the text */
+.cube__text {
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s;
 }

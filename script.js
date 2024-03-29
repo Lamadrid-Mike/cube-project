@@ -12,6 +12,7 @@ let topSideCube = document.getElementById("top");
 let bottomSideCube = document.getElementById("bottom");
 let topImageFront = document.getElementById("top__front-image");
 let frontSideCube = document.getElementById("front");
+let cubeText = document.getElementById("cube__text");
 
 const cubeRotation = function (xAngle, yAngle) {
   cube.style.transform = `rotateX(${xAngle}deg) rotateY(${yAngle}deg)`;
@@ -150,7 +151,12 @@ const playCube = function () {
       changeCubeImages();
       cubeCycle = !cubeCycle;
       topImageFront.style.transform = "";
+      cubeText.style.opacity = 1;
       return timeoutEffect(3);
+    })
+    .then(() => {
+      cubeText.style.opacity = 0;
+      return timeoutEffect(1);
     })
     .then(() => {
       playCube();
