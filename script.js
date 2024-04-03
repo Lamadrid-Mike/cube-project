@@ -47,8 +47,6 @@ const changeCubeImages = function () {
 const hideSidesCube = function () {
   let allCubeSides = Array.from(document.getElementsByClassName("face"));
 
-  earth.style.animation = "";
-
   allCubeSides.forEach((sides) => {
     sides.classList.remove(`${sides.id}-effect`);
     sides.style.opacity = 0;
@@ -61,8 +59,8 @@ const hideSidesCube = function () {
 const playCube = function () {
   earth.style.opacity = 1;
   cubeCycle
-    ? (earth.style.background = `url("/images/bad-to-good-earth.gif")`)
-    : (earth.style.background = `url("/images/good-to-bad-earth.gif")`);
+    ? (earth.style.background = `url("/images/bad-to-good-earth.gif") 0px 0px / cover`)
+    : (earth.style.background = `url("/images/good-to-bad-earth.gif") 0px 0px / cover`);
   timeoutEffect(2)
     .then(() => {
       frontSideCube.style.opacity = 1;
@@ -124,11 +122,11 @@ const playCube = function () {
     })
     .then(() => {
       cubeCycle
-        ? (earth.style.background = `url("/images/good-earth.jpg")`)
-        : (earth.style.background = `url("/images/bad-earth.jpg")`);
+        ? (earth.style.background = `url("/images/good-earth.jpg") 0px 0px / cover`)
+        : (earth.style.background = `url("/images/bad-earth.jpg") 0px 0px / cover`);
       outerLayerCube.classList.add("cube-rotation");
       earth.style.animation =
-        "earth-rotate 5s linear infinite, background-spin 15s infinite";
+        "earth-rotate 5s linear infinite, background-spin 25s linear infinite";
       return timeoutEffect(5);
     })
     .then(() => {
@@ -136,9 +134,8 @@ const playCube = function () {
       return timeoutEffect(9);
     })
     .then(() => {
+      earth.style.animation = "";
       hideSidesCube();
-    })
-    .then(() => {
       xAngle = 0;
       yAngle = 0;
       cubeRotation(xAngle, yAngle);
