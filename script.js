@@ -57,6 +57,7 @@ const hideSidesCube = function () {
 //false will be bad to good gif, and bad image background
 
 const playCube = function () {
+  earth.style.animation = "background-spin 30s linear infinite";
   earth.style.opacity = 1;
   cubeCycle
     ? (earth.style.background = `url("/images/bad-to-good-earth.gif") 0px 0px / cover`)
@@ -126,7 +127,7 @@ const playCube = function () {
         : (earth.style.background = `url("/images/bad-earth.jpg") 0px 0px / cover`);
       outerLayerCube.classList.add("cube-rotation");
       earth.style.animation =
-        "earth-rotate 5s linear infinite, background-spin 25s linear infinite";
+        "earth-rotate 5s linear infinite, background-spin 30s linear infinite";
       return timeoutEffect(5);
     })
     .then(() => {
@@ -134,14 +135,14 @@ const playCube = function () {
       return timeoutEffect(9);
     })
     .then(() => {
-      earth.style.animation = "";
+      earth.style.opacity = 0;
+      earth.style.animation = "background-spin 30s linear infinite";
       hideSidesCube();
       xAngle = 0;
       yAngle = 0;
       cubeRotation(xAngle, yAngle);
       cube.classList.remove("active-hover");
       outerLayerCube.classList.remove("cube-rotation");
-      earth.style.opacity = 0;
       return timeoutEffect(1);
     })
     .then(() => {
@@ -152,6 +153,7 @@ const playCube = function () {
       return timeoutEffect(3);
     })
     .then(() => {
+      earth.style.animation = "";
       cubeText.style.opacity = 0;
       return timeoutEffect(1);
     })
