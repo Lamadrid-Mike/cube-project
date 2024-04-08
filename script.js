@@ -61,7 +61,7 @@ addEventListener("DOMContentLoaded", function () {
     cubeCycle
       ? (earth.style.background = `url("/images/bad-to-good-earth.gif") 0px 0px / cover`)
       : (earth.style.background = `url("/images/good-to-bad-earth.gif") 0px 0px / cover`);
-    earth.style.animation = "background-spin 30s linear infinite";
+    earth.style.animation = "background-spin 35s linear infinite";
     earth.style.opacity = 1;
     timeoutEffect(2)
       .then(() => {
@@ -128,7 +128,7 @@ addEventListener("DOMContentLoaded", function () {
           : (earth.style.background = `url("/images/bad-earth.jpg") 0px 0px / cover`);
         outerLayerCube.classList.add("cube-rotation");
         earth.style.animation =
-          "earth-rotate 5s linear infinite, background-spin 30s linear infinite";
+          "earth-rotate 5s linear infinite, background-spin 35s linear infinite";
         return timeoutEffect(5);
       })
       .then(() => {
@@ -137,7 +137,7 @@ addEventListener("DOMContentLoaded", function () {
       })
       .then(() => {
         earth.style.opacity = 0;
-        earth.style.animation = "background-spin 30s linear infinite";
+        earth.style.animation = "background-spin 35s linear infinite";
         hideSidesCube();
         xAngle = 0;
         yAngle = 0;
