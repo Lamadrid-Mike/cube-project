@@ -1,9 +1,12 @@
 body {
-  background-color: grey;
-  font-size: 30px;
+  background-color: white;
   perspective: 1000px;
   overflow: hidden;
   position: relative;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .outer__layer-cube {
@@ -13,7 +16,7 @@ body {
 }
 
 .cube {
-  margin: 40vh auto;
+  margin: 30vh auto;
   width: 200px;
   height: 200px;
   transform-style: preserve-3d;
@@ -36,7 +39,7 @@ body {
 /* global classes-------------*/
 
 /* the cube will open when mouse hover! */
-.cube:hover,
+/* .cube:hover, */
 .active-hover {
   .front {
     transform: translateZ(250px);
@@ -75,8 +78,7 @@ body {
   0% {
     transform: translateZ(100px) translateY(300px) translateX(300px);
   }
-  75% {
-  }
+
   100% {
     transform: translateZ(100px);
   }
@@ -241,6 +243,7 @@ body {
 }
 
 .earth {
+  opacity: 0;
   width: 190px;
   height: 190px;
   border-radius: 50%;
@@ -268,23 +271,84 @@ body {
   animation: cube-rotation 5s linear infinite;
 }
 
-@keyframes fade-out {
+@keyframes fade-in {
   0% {
-    opacity: 1;
+    opacity: 0;
   }
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 
 /* This will be the text */
-.cube__text {
-  color: white;
+
+.cube__text-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: 0;
-  right: 0;
+}
+
+.cube__text {
+  margin: 10px;
   width: 100%;
   text-align: center;
+  animation: fade-in ease-in forwards 1.5s;
+}
+
+.footer__column-align {
+  display: flex;
+  flex-direction: column;
+
+  align-self: center;
+  p {
+    margin: 10px;
+  }
+}
+
+footer {
+  transition: opacity 3.5s;
   opacity: 0;
-  transition: opacity 1s;
+  width: 100%;
+  position: fixed;
+  top: 100%;
+  display: flex;
+  justify-content: space-evenly;
+
+  h2 {
+    margin: 0;
+    text-align: center;
+  }
+
+  button {
+    font-family: inherit;
+    border-radius: 25px;
+    background-color: black;
+    padding: 1rem 1.8rem;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    width: 150px;
+    align-self: center;
+  }
+
+  .footer__link {
+    margin-left: 8px;
+    margin-top: 8px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    .anchor__link {
+      color: black;
+      font-size: 20px;
+    }
+  }
+
+  .line-break {
+    border-radius: 50%;
+    height: 2px;
+    width: 100%;
+    background-color: black;
+  }
 }

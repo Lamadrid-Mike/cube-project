@@ -1,6 +1,7 @@
 let xAngle = 0;
 let yAngle = 0;
 let cubeCycle = false;
+let textCubeCycle = true;
 
 let cube = document.getElementById("cube");
 let outerLayerCube = document.getElementById("outer__layer-cube");
@@ -13,6 +14,9 @@ let bottomSideCube = document.getElementById("bottom");
 let topImageFront = document.getElementById("top__front-image");
 let frontSideCube = document.getElementById("front");
 let cubeText = document.getElementById("cube__text");
+let frontImageCube = document.getElementById("front__image-face");
+let textContainer = document.getElementById("cube__text-container");
+let footer = document.getElementById("footer__container");
 
 const cubeRotation = function (xAngle, yAngle) {
   cube.style.transform = `rotateX(${xAngle}deg) rotateY(${yAngle}deg)`;
@@ -24,10 +28,6 @@ const timeoutEffect = (seconds) => {
     setTimeout(resolve, seconds);
   });
 };
-
-document.addEventListener("DOMContentLoaded", function () {
-  playCube();
-});
 
 const changeCubeImages = function () {
   let allImagesSource = Array.from(document.querySelectorAll("body img"));
@@ -53,9 +53,47 @@ const hideSidesCube = function () {
   });
 };
 
+let firstCubeText = [
+  [
+    "What We Can Do This Decade",
+    "Will Determine Quality of Life",
+    "For 8 Billion People on the Planet.",
+  ],
+
+  [
+    "Only by Working Together Can We Succeed.",
+    "40+ Groundbreaking & Transformative",
+    "Sustainability & CSR Programs & Initiatives",
+    "For Individuals, Influencers & Institutions.",
+  ],
+];
+
+const textSlideShow = function (array, delay) {
+  let index = 0;
+  delay = delay * 1000;
+
+  const intervalId = setInterval(() => {
+    const text = array[index];
+    textContainer.insertAdjacentHTML(
+      "beforeend",
+      `<h1 class="cube__text">${text}</h1>`
+    );
+    index++;
+    if (index === array.length) {
+      clearInterval(intervalId);
+    }
+  }, delay);
+};
+
+const deleteTextSlide = function () {
+  let text = textContainer.getElementsByTagName("h1");
+  for (let i = text.length - 1; i >= 0; i--) {
+    textContainer.removeChild(text[i]);
+  }
+};
+
 //true will be good to bad gif, and good image background
 //false will be bad to good gif, and bad image background
-
 addEventListener("DOMContentLoaded", function () {
   const playCube = function () {
     cubeCycle
@@ -148,14 +186,15 @@ addEventListener("DOMContentLoaded", function () {
       })
       .then(() => {
         changeCubeImages();
+        textSlideShow(firstCubeText[Math.round(Math.random())], 2);
         cubeCycle = !cubeCycle;
         topImageFront.style.transform = "";
-        cubeText.style.opacity = 1;
-        return timeoutEffect(3);
+        return timeoutEffect(10);
       })
       .then(() => {
+        footer.style.opacity = 1;
+        deleteTextSlide();
         earth.style.animation = "";
-        cubeText.style.opacity = 0;
         return timeoutEffect(1);
       })
       .then(() => {
