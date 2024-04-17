@@ -16,7 +16,6 @@ let frontSideCube = document.getElementById("front");
 let cubeText = document.getElementById("cube__text");
 let frontImageCube = document.getElementById("front__image-face");
 let textContainer = document.getElementById("cube__text-container");
-let footer = document.getElementById("footer__container");
 
 const cubeRotation = function (xAngle, yAngle) {
   cube.style.transform = `rotateX(${xAngle}deg) rotateY(${yAngle}deg)`;
@@ -192,7 +191,6 @@ addEventListener("DOMContentLoaded", function () {
         return timeoutEffect(10);
       })
       .then(() => {
-        footer.style.opacity = 1;
         deleteTextSlide();
         earth.style.animation = "";
         return timeoutEffect(1);

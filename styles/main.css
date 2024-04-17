@@ -16,7 +16,7 @@ body {
 }
 
 .cube {
-  margin: 30vh auto;
+  margin: 35vh auto;
   width: 200px;
   height: 200px;
   transform-style: preserve-3d;
@@ -296,7 +296,7 @@ body {
   animation: fade-in ease-in forwards 1.5s;
 }
 
-.footer__column-align {
+/* .footer__column-align {
   display: flex;
   flex-direction: column;
 
@@ -304,9 +304,9 @@ body {
   p {
     margin: 10px;
   }
-}
+} */
 
-footer {
+/* footer {
   transition: opacity 3.5s;
   opacity: 0;
   width: 100%;
@@ -351,4 +351,4 @@ footer {
     width: 100%;
     background-color: black;
   }
-}
+} */
