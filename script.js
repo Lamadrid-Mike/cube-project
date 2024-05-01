@@ -1,7 +1,7 @@
 let xAngle = 0;
 let yAngle = 0;
 let cubeCycle = false;
-let textCubeCycle = true;
+let numberOfCycles = 0;
 
 let cube = document.getElementById("cube");
 let outerLayerCube = document.getElementById("outer__layer-cube");
@@ -52,7 +52,8 @@ const hideSidesCube = function () {
   });
 };
 
-let firstCubeText = [
+let cubeParagraphs = [
+  ["The World Is In Crisis", "We are at the Tipping Point for Humanity."],
   [
     "What We Can Do This Decade",
     "Will Determine Quality of Life",
@@ -64,6 +65,11 @@ let firstCubeText = [
     "40+ Groundbreaking & Transformative",
     "Sustainability & CSR Programs & Initiatives",
     "For Individuals, Influencers & Institutions.",
+  ],
+  [
+    "Contact Us Today & See How We Can Collaborate",
+    "Let’s Partner Together To Exceed Your Objectives",
+    "While Working for the Betterment of Kids, People & The Planet.",
   ],
 ];
 
@@ -95,12 +101,54 @@ const deleteTextSlide = function () {
 //false will be bad to good gif, and bad image background
 addEventListener("DOMContentLoaded", function () {
   const playCube = function () {
-    cubeCycle
-      ? (earth.style.background = `url("/images/bad-to-good-earth.gif") 0px 0px / cover`)
-      : (earth.style.background = `url("/images/good-to-bad-earth.gif") 0px 0px / cover`);
-    earth.style.animation = "background-spin 35s linear infinite";
-    earth.style.opacity = 1;
-    timeoutEffect(2)
+    timeoutEffect(0)
+      .then(() => {
+        if (cubeCycle) {
+          return Promise.resolve();
+        } else {
+          frontImageCube.src = "/images/good-side-1.png";
+          frontSideCube.style.opacity = 1;
+          frontSideCube.classList.add("front-effect");
+          return timeoutEffect(5);
+        }
+      })
+
+      .then(() => {
+        if (cubeCycle) {
+          return Promise.resolve();
+        } else {
+          frontSideCube.style.opacity = 0;
+          frontSideCube.classList.remove("front-effect");
+          frontImageCube.src = "/images/bad-side-1.png";
+          return timeoutEffect(1);
+        }
+      })
+
+      .then(() => {
+        if (cubeCycle) {
+          return Promise.resolve();
+        } else {
+          textSlideShow(cubeParagraphs[0], 2);
+          return timeoutEffect(7);
+        }
+      })
+
+      .then(() => {
+        if (cubeCycle) {
+          return Promise.resolve();
+        } else {
+          deleteTextSlide();
+          return timeoutEffect(1);
+        }
+      })
+      .then(() => {
+        cubeCycle
+          ? (earth.style.background = `url("/images/bad-to-good-earth.gif") 0px 0px / cover`)
+          : (earth.style.background = `url("/images/good-to-bad-earth.gif") 0px 0px / cover`);
+        earth.style.opacity = 1;
+        earth.style.animation = "background-spin 35s linear infinite";
+        return timeoutEffect(2);
+      })
       .then(() => {
         frontSideCube.style.opacity = 1;
         frontSideCube.classList.add("front-effect");
@@ -185,8 +233,9 @@ addEventListener("DOMContentLoaded", function () {
       })
       .then(() => {
         changeCubeImages();
-        textSlideShow(firstCubeText[Math.round(Math.random())], 2);
-        cubeCycle = !cubeCycle;
+        cubeCycle
+          ? textSlideShow(cubeParagraphs[2], 2)
+          : textSlideShow(cubeParagraphs[1], 2);
         topImageFront.style.transform = "";
         return timeoutEffect(10);
       })
@@ -196,7 +245,22 @@ addEventListener("DOMContentLoaded", function () {
         return timeoutEffect(1);
       })
       .then(() => {
-        playCube();
+        numberOfCycles++;
+        if (cubeCycle) {
+          return Promise.resolve();
+        } else {
+          cubeCycle = true;
+          playCube();
+        }
+      })
+      .then(() => {
+        if (numberOfCycles === 2) {
+          textContainer.insertAdjacentHTML(
+            "beforeend",
+            `<img class="final__image" src="/images/final-image.png" width="350" height="auto">
+             <h1 class="cube__text">CSRBenefitsHub.com</h1>`
+          );
+        }
       });
   };
   playCube();

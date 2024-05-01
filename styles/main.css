@@ -280,6 +280,20 @@ body {
   }
 }
 
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  animation: fade-out ease-in forwards 1.5s;
+}
+
 /* This will be the text */
 
 .cube__text-container {
@@ -287,6 +301,7 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
+  align-items: center;
 }
 
 .cube__text {
@@ -296,59 +311,6 @@ body {
   animation: fade-in ease-in forwards 1.5s;
 }
 
-/* .footer__column-align {
-  display: flex;
-  flex-direction: column;
-
-  align-self: center;
-  p {
-    margin: 10px;
-  }
-} */
-
-/* footer {
-  transition: opacity 3.5s;
-  opacity: 0;
-  width: 100%;
-  position: fixed;
-  top: 100%;
-  display: flex;
-  justify-content: space-evenly;
-
-  h2 {
-    margin: 0;
-    text-align: center;
-  }
-
-  button {
-    font-family: inherit;
-    border-radius: 25px;
-    background-color: black;
-    padding: 1rem 1.8rem;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    width: 150px;
-    align-self: center;
-  }
-
-  .footer__link {
-    margin-left: 8px;
-    margin-top: 8px;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    .anchor__link {
-      color: black;
-      font-size: 20px;
-    }
-  }
-
-  .line-break {
-    border-radius: 50%;
-    height: 2px;
-    width: 100%;
-    background-color: black;
-  }
-} */
+.final__image {
+  animation: fade-in ease-in forwards 1.5s;
+}
