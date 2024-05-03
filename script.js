@@ -76,18 +76,30 @@ let cubeParagraphs = [
 const textSlideShow = function (array, delay) {
   let index = 0;
   delay = delay * 1000;
+  let intervalId;
 
-  const intervalId = setInterval(() => {
+  const insertText = () => {
     const text = array[index];
-    textContainer.insertAdjacentHTML(
-      "beforeend",
-      `<h1 class="cube__text">${text}</h1>`
-    );
-    index++;
-    if (index === array.length) {
+
+    if (index === array.length - 1) {
       clearInterval(intervalId);
     }
-  }, delay);
+
+    if (textContainer.querySelector("h1")) {
+      document.getElementById("cube__text").innerHTML = text;
+    } else {
+      textContainer.insertAdjacentHTML(
+        "beforeend",
+        `<h1 id="cube__text" class="cube__text">${text}</h1>`
+      );
+    }
+
+    index++;
+  };
+
+  insertText();
+
+  intervalId = setInterval(insertText, delay);
 };
 
 const deleteTextSlide = function () {
@@ -128,7 +140,7 @@ addEventListener("DOMContentLoaded", function () {
         if (cubeCycle) {
           return Promise.resolve();
         } else {
-          textSlideShow(cubeParagraphs[0], 2);
+          textSlideShow(cubeParagraphs[0], 3);
           return timeoutEffect(7);
         }
       })
@@ -234,8 +246,8 @@ addEventListener("DOMContentLoaded", function () {
       .then(() => {
         changeCubeImages();
         cubeCycle
-          ? textSlideShow(cubeParagraphs[2], 2)
-          : textSlideShow(cubeParagraphs[1], 2);
+          ? textSlideShow(cubeParagraphs[2], 3)
+          : textSlideShow(cubeParagraphs[1], 3);
         topImageFront.style.transform = "";
         return timeoutEffect(10);
       })
