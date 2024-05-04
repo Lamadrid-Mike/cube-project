@@ -75,8 +75,8 @@ let cubeParagraphs = [
 
 const textSlideShow = function (array, delay) {
   let index = 0;
-  delay = delay * 1000;
   let intervalId;
+  delay = delay * 1000;
 
   const insertText = () => {
     const text = array[index];
@@ -112,13 +112,13 @@ const deleteTextSlide = function () {
 //true will be good to bad gif, and good image background
 //false will be bad to good gif, and bad image background
 addEventListener("DOMContentLoaded", function () {
+  frontImageCube.src = "/images/good-side-1.png";
   const playCube = function () {
     timeoutEffect(0)
       .then(() => {
         if (cubeCycle) {
           return Promise.resolve();
         } else {
-          frontImageCube.src = "/images/good-side-1.png";
           frontSideCube.style.opacity = 1;
           frontSideCube.classList.add("front-effect");
           return timeoutEffect(5);
@@ -140,7 +140,7 @@ addEventListener("DOMContentLoaded", function () {
         if (cubeCycle) {
           return Promise.resolve();
         } else {
-          textSlideShow(cubeParagraphs[0], 3);
+          textSlideShow(cubeParagraphs[0], 4);
           return timeoutEffect(7);
         }
       })
@@ -246,8 +246,8 @@ addEventListener("DOMContentLoaded", function () {
       .then(() => {
         changeCubeImages();
         cubeCycle
-          ? textSlideShow(cubeParagraphs[2], 3)
-          : textSlideShow(cubeParagraphs[1], 3);
+          ? textSlideShow(cubeParagraphs[2], 4)
+          : textSlideShow(cubeParagraphs[1], 4);
         topImageFront.style.transform = "";
         return timeoutEffect(10);
       })
