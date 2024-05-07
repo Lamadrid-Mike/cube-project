@@ -53,7 +53,7 @@ const hideSidesCube = function () {
 };
 
 let cubeParagraphs = [
-  ["The World Is In Crisis", "We are at the Tipping Point for Humanity."],
+  ["The World Is In Crisis", "We are at the Tipping Point <br/> for Humanity."],
   [
     "What We Can Do This Decade",
     "Will Determine Quality of Life",
@@ -73,33 +73,31 @@ let cubeParagraphs = [
   ],
 ];
 
-const textSlideShow = function (array, delay) {
-  let index = 0;
-  let intervalId;
-  delay = delay * 1000;
-
-  const insertText = () => {
-    const text = array[index];
-
-    if (index === array.length - 1) {
-      clearInterval(intervalId);
-    }
-
+const textSlideShow = function (array) {
+  array.forEach((text, index) => {
     if (textContainer.querySelector("h1")) {
-      document.getElementById("cube__text").innerHTML = text;
+      setTimeout(() => {
+        document.getElementById(
+          "cube__text"
+        ).style.animation = `fade-in forwards 1.5s`;
+        document.getElementById("cube__text").innerHTML = text;
+      }, 4000 * index);
+
+      setTimeout(() => {
+        document.getElementById(
+          "cube__text"
+        ).style.animation = `fade-out forwards 1.5s`;
+      }, 3000 * index);
     } else {
       textContainer.insertAdjacentHTML(
         "beforeend",
         `<h1 id="cube__text" class="cube__text">${text}</h1>`
       );
+      document.getElementById(
+        "cube__text"
+      ).style.animation = `fade-in forwards 1.5s`;
     }
-
-    index++;
-  };
-
-  insertText();
-
-  intervalId = setInterval(insertText, delay);
+  });
 };
 
 const deleteTextSlide = function () {
@@ -112,7 +110,7 @@ const deleteTextSlide = function () {
 //true will be good to bad gif, and good image background
 //false will be bad to good gif, and bad image background
 addEventListener("DOMContentLoaded", function () {
-  frontImageCube.src = "/images/good-side-1.png";
+  frontImageCube.src = "/images/first-image.png";
   const playCube = function () {
     timeoutEffect(0)
       .then(() => {
@@ -140,8 +138,8 @@ addEventListener("DOMContentLoaded", function () {
         if (cubeCycle) {
           return Promise.resolve();
         } else {
-          textSlideShow(cubeParagraphs[0], 4);
-          return timeoutEffect(7);
+          textSlideShow(cubeParagraphs[0]);
+          return timeoutEffect(8);
         }
       })
 
@@ -246,10 +244,10 @@ addEventListener("DOMContentLoaded", function () {
       .then(() => {
         changeCubeImages();
         cubeCycle
-          ? textSlideShow(cubeParagraphs[2], 4)
-          : textSlideShow(cubeParagraphs[1], 4);
+          ? textSlideShow(cubeParagraphs[2])
+          : textSlideShow(cubeParagraphs[1]);
         topImageFront.style.transform = "";
-        return timeoutEffect(10);
+        return timeoutEffect(16);
       })
       .then(() => {
         deleteTextSlide();
@@ -272,6 +270,7 @@ addEventListener("DOMContentLoaded", function () {
             `<img class="final__image" src="/images/final-image.png" width="350" height="auto">
              <h1 class="cube__text">CSRBenefitsHub.com</h1>`
           );
+          textContainer.style.animation = "fade-in ease-in forwards 1.5s";
         }
       });
   };
